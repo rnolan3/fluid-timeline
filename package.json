@@ -1,0 +1,30 @@
+{
+  "name": "fluid-timeline",
+  "version": "1.0.0",
+  "description": "A javascript timeline module that features a sticky index.",
+  "main": "MIT",
+  "scripts": {
+    "lint": "eslint modules examples",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rnolan3/fluid-timeline.git"
+  },
+  "author": "Robert Nolan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rnolan3/fluid-timeline/issues"
+  },
+  "homepage": "https://github.com/rnolan3/fluid-timeline#readme",
+  "devDependencies": {
+    "babel-core": "^6.3.21",
+    "babel-eslint": "^4.1.6",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "eslint": "^1.10.3",
+    "eslint-config-rackt": "^1.1.1",
+    "eslint-plugin-react": "^3.14.0",
+    "webpack": "^1.12.9",
+  }
+}
