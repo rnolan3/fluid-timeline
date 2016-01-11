@@ -1,4 +1,4 @@
-# Fluid Timeline Examples
+# Sticky List Examples
 To run the examples in your development environment:
 
 1. Clone this repo
