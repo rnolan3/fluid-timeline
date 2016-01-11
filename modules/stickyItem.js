@@ -18,7 +18,10 @@ export default function StickyItem (element, config = {}) {
     throw new Error('Expected `element` to be an HTML element.')
   }
 
-  const selectors = { keyClassName: config.keyClassName || 'sticky-list-item' }
+  const selectors = {
+    keyClassName: config.keyClassName || 'sticky-list-item-key'
+  }
+
   const keyElem = element.getElementsByClassName(selectors.keyClassName)[0]
   const origKeyOffset = keyElem.offsetLeft
 
