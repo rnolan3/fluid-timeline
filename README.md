@@ -1,13 +1,25 @@
-# Fluid Timeline
+# Sticky List
 
-A framework agnostic javascript module that applies a fluid animation to your timeline.
+This is a framework agnostic javascript module that applies a sticky index to any point value list (e.g. timelines, lists).
 
-![Demo](https://github.com/rnolan3/fluid-timeline/blob/screenshots/fluid-timeline-demo.gif)
+Inspired by webkit's `position: sticky`, your list keys are statically positioned until the key hits the top of the page. It then becomes fixed. The difference is that the key's fixed position is relative to the previous key. This allows for a clean index that allows to user to jump easily between points.
+
+![Demo](https://travis-ci.org/rnolan3/fluid-timeline.svg)
 
 ## Installation
 
+To install the stable version:
+
 ```
-npm install fluid-timeline
+npm install sticky-list
+```
+
+This assumes that you are using [https://www.npmjs.com/](NPM) with a module builder like [https://webpack.github.io/](Webpack) or [http://browserify.org/](Browserify).
+
+Alternatively, you can grab the single-file UMB from [https://npmcdn.com/](npmcdn) that makes `StickyList` available as a global object.
+
+```
+<script src="https://npmcdn.com/sticky-list/umd/StickyList.min.js"></script>
 ```
 
 ## Usage
@@ -15,93 +27,33 @@ npm install fluid-timeline
 Start by including the timeline event in module.
 
 ```
-import fluidTimeline from 'fluid-timeline';
+import StickyList from ‘sticky-list’;
 ```
 
-Alternatively you can use the UMD.
-
-Next, you'll want to instantiate your timeline.
+Next, you'll want to instantiate your sticky-list.
 
 ```
 // Vanilla JS
-var events = document.getElementById('fluid-events');
-// Jquery
-var events = $('.events');
+var stickyListTarget = document.getElementById('sticky-list');
+var stickyListItems = stickyListTarget.getElementsByClassName('sticky-list-items');
 
-var timeline = fluidTimeline();
+// ...or with jQuery
+var stickyListTarget = $('#sticky-list');
+var stickyListItems = stickyListTarget.find('sticky-list-items');
 
-// Bind timeline events
-for (var i = 0; i < events.length; i++) {
-  timeline.createEvent(events);
+var StickyListSource = StickyList(stickyList);
+
+// Bind items to list
+for (var i = 0; i < stickyListItems.length; i++) {
+  StickyListSource.bindItem(stickyListItems[i]);
 }
 ```
 
-Or if you're a crazy cool kid and use React, it'll look something like this.
-
-```
-
-var TimelineEvent = React.createClass({
-
-  render () {
-    var { year, title } = this.props;
-
-    return (
-      <div>
-        <h1>{ year }</h1>
-        <h2>{ title }</h2>
-      </div>
-    );
-  }
-
-});
-
-var Timeline = React.createClass({
-
-  getDefaultProps () {
-    return {
-      events: [
-        { year: 2015, title: 'My second life experience. Neat.' },
-        { year: 2014, title: 'My first life experience.' }
-      ]
-    };
-  },
-
-  componentWillMount () {
-    this._timelineEvents = [];
-    this._timeline = fluidTimeline();
-  }
-
-  componentDidMount () {
-    this._timelineEvents.forEach((e) => {
-      this._timeline.createEvent(ReactDOM.findDOMNode(e));
-    });
-  },
-
-  renderTimelineEvents () {
-    return this.props.events.forEach((e, key) => {
-      return (<TimelineEvent
-          description={ e.description }
-          key={ key }
-          ref={ (ref) => this._timelineEvents.push(ref) }
-          year={ e.year } />);
-    });
-  }
-
-  render () {
-    return (
-      <div>
-        { this.renderTimelineEvents() }
-      </div>
-    )
-  }
-
-});
-
-```
+And that's it!
 
 ## Configuration
 
-The `createEvent` method has a single configuration option to change the key className.
+The `bindItem` method has a single configuration option to change the key className.
 
 ```
 
