@@ -40,7 +40,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      'fluid-timeline': path.join(__dirname, '../modules')
+      'sticky-list': path.join(__dirname, '../modules')
     }
   },
 
