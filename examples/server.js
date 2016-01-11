@@ -37,7 +37,7 @@ fs.readdirSync(__dirname).forEach(function (file) {
         version: packageInfo.version,
         title: exampleTitle,
         script: `/__build__/${ file }.js`,
-        timelineEvents: require('./__common__/example-events')
+        listItems: require('./__common__/exampleData')
       })
     })
   }
