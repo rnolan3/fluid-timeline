@@ -2,6 +2,8 @@
 
 A framework agnostic javascript module that applies a fluid animation to your timeline.
 
+![Demo](https://github.com/rnolan3/fluid-timeline/blob/screenshots/fluid-timeline-demo.gif)
+
 ## Installation
 
 ```
