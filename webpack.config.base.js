@@ -5,7 +5,7 @@ module.exports = {
     ]
   },
   output: {
-    library: 'fluidTimeline',
+    library: 'StickyList',
     libraryTarget: 'umd'
 
   }
