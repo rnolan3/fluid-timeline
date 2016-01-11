@@ -1,12 +1,12 @@
 {
-  "name": "fluid-timeline",
+  "name": "sticky-list",
   "version": "1.0.0",
   "description": "A javascript timeline module that features a sticky index.",
   "main": "lib/index.js",
   "scripts": {
     "build:lib": "babel modules --out-dir lib",
-    "build:umd:min": "NODE_ENV=production webpack modules/index.js dist/fluid-timeline.min.js --config webpack.config.production.js",
-    "build:umd": "webpack modules/index.js dist/fluid-timeline.js --config webpack.config.development.js",
+    "build:umd:min": "NODE_ENV=production webpack modules/index.js dist/sticky-list.min.js --config webpack.config.production.js",
+    "build:umd": "webpack modules/index.js dist/sticky-list.js --config webpack.config.development.js",
     "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
     "clean": "rimraf lib dist coverage",
     "lint": "eslint modules examples",
@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rnolan3/fluid-timeline.git"
+    "url": "git+https://github.com/rnolan3/sticky-list.git"
   },
   "author": "Robert Nolan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rnolan3/fluid-timeline/issues"
+    "url": "https://github.com/rnolan3/sticky-list/issues"
   },
-  "homepage": "https://github.com/rnolan3/fluid-timeline#readme",
+  "homepage": "https://github.com/rnolan3/sticky-list#readme",
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
     "babel-cli": "^6.4.0",
