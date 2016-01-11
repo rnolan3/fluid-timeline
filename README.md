@@ -1,10 +1,12 @@
 # Sticky List
 
+![Demo](https://raw.github.com/rnolan3/sticky-list/screenshots/sticky-list-demo.gif)
+
 This is a framework agnostic javascript module that applies a sticky index to any point value list (e.g. timelines, lists).
 
 Inspired by webkit's `position: sticky`, your list keys are statically positioned until the key hits the top of the page. It then becomes fixed. The difference is that the key's fixed position is relative to the previous key. This allows for a clean index that allows to user to jump easily between points.
 
-![Demo](https://travis-ci.org/rnolan3/fluid-timeline.svg)
+![Build Status](https://travis-ci.org/rnolan3/sticky-list.svg)
 
 ## Installation
 
