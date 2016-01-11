@@ -1,69 +1,68 @@
+import StickyItem from './stickyItem'
 import eventListener from './utils/eventListener'
-import fluidEvent from './fluidEvent'
 
-// Bind scroll listener to body when fluid timeline is initialized.
+// Bind event listeners to body when sticky-list is initialized.
 const scrollSource = eventListener([ 'scroll', 'touchmove' ])
 const resizeSource = eventListener([ 'resize', 'orientationchange' ])
 
 /**
- * A `fluidTimeline()`` is a high-level API for automatically setting up a
- * fluid timeline. This method automatically updates the state of it's events.
+ * A `stickyList()`` is a high-level API for automatically setting up a
+ * StickyList. This method automatically updates the state of it's items.
  *
- * @param  {HTMLElement} wrapper  DOM node that wraps the timeline events.
+ * @param  {HTMLElement} wrapper  DOM node that wraps the list.
  *
- * @return {Object} A Fluid Timeline that allows you to bind Timeline Events and
- * unmount the current instance of the fluid timeline.
+ * @return {Object} An instance of StickyList that allows you to bind
+ * list items and unmount the current instance.
  */
-export default function fluidTimeline (wrapper = document.body) {
+export default function stickyList (wrapper = document.body) {
   const currentWrapper = wrapper
 
-  // Bound timeline events.
-  let fluidTimelineEvents = []
-  let fluidTimelineEventsLength = 0
-  let lastFluidTimelineEvent = null
+  // Bound list items.
+  let stickyListItems = []
+  let stickyListItemsLength = 0
+  let lastListItem = null
 
   let listenerInstance
   let resizeInstance
 
   /**
-   * Resolve the next state of a timeline event.
+   * Resolve the next state of an item in the StickyList.
    *
-   * @param  {fluidEvent} eventSource Instance of a `fluidEvent`.
+   * @param  {StickyItem} itemSource  Instance of a `StickyItem`.
    * @param  {Object} scrollPos   Contains the current top and left scroll
-   * position of document.
+   * position.
    *
    * @returns {void}
    */
-  function _resolveEventState (eventSource, metrics) {
+  function _resolveItemState (itemSource, metrics) {
     if (metrics.lastKeyPos > metrics.currentWrapper.bottom) {
       const keyShim = -(metrics.lastKeyPos - metrics.currentWrapper.bottom)
-      eventSource.setKeyState({
+      itemSource.setKeyState({
         transform: `translateY(${ keyShim }px)`
       })
-    } else if (eventSource.getCoords().top <= eventSource.getFixedPos()) {
-      eventSource.fixEventKey()
+    } else if (itemSource.getCoords().top <= itemSource.getFixedPos()) {
+      itemSource.fixKey()
     } else {
-      eventSource.unfixEventKey()
+      itemSource.unfixKey()
     }
   }
 
   /**
-   * Bind event node to timeline.
+   * Bind item node to a StickyList.
    *
-   * @param  {HTMLElement} element An event DOM node that is within
-   * the timeline.
+   * @param  {HTMLElement} element A DOM node that is within a stickyList.
    * @return {void}
    */
-  function bindEvent (element) {
-    fluidTimelineEvents.push(fluidEvent(element))
-    fluidTimelineEventsLength++
-    lastFluidTimelineEvent = fluidTimelineEvents[fluidTimelineEventsLength - 1]
+  function bindItem (element) {
+    stickyListItems.push(StickyItem(element))
+    stickyListItemsLength++
+    lastListItem = stickyListItems[stickyListItemsLength - 1]
   }
 
   /**
-   * Unsubscribe from scroll event.
+   * Unsubscribe from events.
    *
-   * This is important when the Fluid Timeline is dynamically unmounted.
+   * This is important when the StickyList is dynamically unmounted.
    *
    * @return {void}
    */
@@ -72,18 +71,18 @@ export default function fluidTimeline (wrapper = document.body) {
     resizeSource.unsubscribe(resizeInstance)
   }
 
-  // Listen to scroll changes and update the state of every timeline event.
+  // Listen to scroll changes and update the state of every item.
   listenerInstance = scrollSource.subscribe((scrollPos) => {
-    const lastKeyMetrics = lastFluidTimelineEvent.getKeyCoords()
-    const lastKeyPos = lastFluidTimelineEvent.getFixedPos()
-    const lastEventMetrics = lastFluidTimelineEvent.getCoords()
+    const lastKeyMetrics = lastListItem.getKeyCoords()
+    const lastKeyPos = lastListItem.getFixedPos()
+    const lastItemMetrics = lastListItem.getCoords()
     const currentWrapperMetrics = currentWrapper.getBoundingClientRect()
 
-    fluidTimelineEvents.forEach((eventSource, i) => {
-      eventSource.setIndex(i)
-      _resolveEventState(eventSource, {
+    stickyListItems.forEach((itemSource, i) => {
+      itemSource.setIndex(i)
+      _resolveItemState(itemSource, {
         currentWrapper: currentWrapperMetrics,
-        lastEvent: lastEventMetrics,
+        lastItem: lastItemMetrics,
         lastKey: lastKeyMetrics,
         lastKeyPos: lastKeyPos,
         scrollPos: scrollPos
@@ -91,14 +90,14 @@ export default function fluidTimeline (wrapper = document.body) {
     })
   })
 
-  // Listen to resize events and positions fixed event keys to keep them in them
+  // Listen to resize events and re-positions fixed keys to keep them in the
   // correct location.
   resizeInstance = resizeSource.subscribe(() => {
-    fluidTimelineEvents.forEach((eventSource) => {
-      if (!eventSource.isStatic()) {
-        const left = eventSource.getCoords().left +
-          eventSource.getKeyCoords().staticOffsetLeft
-        eventSource.setKeyState({
+    stickyListItems.forEach((itemSource) => {
+      if (!itemSource.isStatic()) {
+        const left = itemSource.getCoords().left +
+          itemSource.getKeyCoords().staticOffsetLeft
+        itemSource.setKeyState({
           left: `${ left }px`
         })
       }
@@ -106,7 +105,7 @@ export default function fluidTimeline (wrapper = document.body) {
   })
 
   return {
-    bindEvent,
+    bindItem,
     destroy
   }
 }
