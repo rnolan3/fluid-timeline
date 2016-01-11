@@ -1,0 +1,7 @@
+<div id="<%= stickyListId %>">
+  <h2>Begin <%= stickyListTitle %></h2>
+  <% listItems.forEach((listItem, i) => { %>
+    <% var listItemKey = (i < 10 ? '0' : '') + i %>
+    <%- include ../__common__/listItem %>
+  <% }); %>
+</div>
