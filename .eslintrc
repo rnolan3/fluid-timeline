@@ -1,7 +1,0 @@
-{
-  "extends": "rackt",
-  "rules": {
-    "space-before-function-paren": [1, "always"],
-    "max-len": [1, 80, 4]
-  }
-}
