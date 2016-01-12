@@ -21,7 +21,7 @@ This assumes that you are using [https://www.npmjs.com/](NPM) with a module buil
 Alternatively, you can grab the single-file UMB from [https://npmcdn.com/](npmcdn) that makes `StickyList` available as a global object.
 
 ```
-<script src="https://npmcdn.com/sticky-list/umd/StickyList.min.js"></script>
+<script src="https://npmcdn.com/sticky-list/dist/sticky-list.min.js"></script>
 ```
 
 ## Usage
