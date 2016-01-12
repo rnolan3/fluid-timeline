@@ -51,10 +51,11 @@ export default function stickyList (wrapper = document.body) {
    * Bind item node to a StickyList.
    *
    * @param  {HTMLElement} element A DOM node that is within a stickyList.
+   * @param  {Object} config  Pass configuration settings using a plain object.
    * @return {void}
    */
-  function bindItem (element) {
-    stickyListItems.push(StickyItem(element))
+  function bindItem (element, config) {
+    stickyListItems.push(StickyItem(element, config))
     stickyListItemsLength++
     lastListItem = stickyListItems[stickyListItemsLength - 1]
   }
