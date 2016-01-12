@@ -26,13 +26,13 @@ Alternatively, you can grab the single-file UMB from [https://npmcdn.com/](npmcd
 
 ## Usage
 
-Start by including the timeline event in module.
+Start by including the StickyList module:
 
 ```
 import StickyList from ‘sticky-list’;
 ```
 
-Next, you'll want to instantiate your sticky-list.
+Next, you'll want to instantiate your sticky-list:
 
 ```
 // Vanilla JS
