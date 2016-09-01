@@ -18,10 +18,10 @@ npm install sticky-list
 
 This assumes that you are using [https://www.npmjs.com/](NPM) with a module builder like [https://webpack.github.io/](Webpack) or [http://browserify.org/](Browserify).
 
-Alternatively, you can grab the single-file UMB from [https://npmcdn.com/](npmcdn) that makes `StickyList` available as a global object.
+Alternatively, you can grab the single-file UMB from [https://unpkg.com/](unpkg) that makes `StickyList` available as a global object.
 
 ```
-<script src="https://npmcdn.com/sticky-list/dist/sticky-list.min.js"></script>
+<script src="https://unpkg.com/sticky-list/dist/sticky-list.min.js"></script>
 ```
 
 ## Usage
